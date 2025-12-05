@@ -208,30 +208,33 @@
                             <div class="music-label">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5"><path fill-rule="evenodd" d="M17.721 1.599a.75.75 0 01.279.584v11.29a2.25 2.25 0 01-1.774 2.198l-2.041.442a2.216 2.216 0 01-.938-4.333l2.662-.576a.75.75 0 00.591-.734V6.112l-8 1.73v7.684a2.25 2.25 0 01-1.774 2.2l-2.042.44a2.216 2.216 0 11-.935-4.33l2.659-.574A.75.75 0 007 12.53V4.237a.75.75 0 01.591-.733l9.5-2.054a.75.75 0 01.63.149z" clip-rule="evenodd"></path></svg> Playing on Spotify
                             </div>                        
-                            </div>
+                        </div>
                         
                         <div class="spotify-title">${spotify.song}</div>
                         <div class="spotify-artist">${spotify.artist}</div>
                     </div>
                 `;
+        } else if (data.spotify) {
+            // Show last listened to song when not currently playing
+            const spotify = data.spotify;
+            document.getElementById('spotifyCard').innerHTML = `
+                <img src="${spotify.album_art_url}" alt="Album Art" class="album-art" style="opacity: 0.6;">
+                <div class="spotify-info">
+                    <div class="spotify-label">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5"><path fill-rule="evenodd" d="M17.721 1.599a.75.75 0 01.279.584v11.29a2.25 2.25 0 01-1.774 2.198l-2.041.442a2.216 2.216 0 01-.938-4.333l2.662-.576a.75.75 0 00.591-.734V6.112l-8 1.73v7.684a2.25 2.25 0 01-1.774 2.2l-2.042.44a2.216 2.216 0 11-.935-4.33l2.659-.574A.75.75 0 007 12.53V4.237a.75.75 0 01.591-.733l9.5-2.054a.75.75 0 01.63.149z" clip-rule="evenodd"></path></svg> Last played on Spotify
+                    </div>
+                    
+                    <div class="spotify-title">${spotify.song}</div>
+                    <div class="spotify-artist">${spotify.artist}</div>
+                </div>
+            `;
             } else {
-                const spotifyActivity = data.activities.find(a => a.name === 'Spotify');
-                if (spotifyActivity) {
-                    document.getElementById('spotifyCard').innerHTML = `
-                        <div class="spotify-info">
-                            <div class="spotify-label"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5"><path fill-rule="evenodd" d="M17.721 1.599a.75.75 0 01.279.584v11.29a2.25 2.25 0 01-1.774 2.198l-2.041.442a2.216 2.216 0 01-.938-4.333l2.662-.576a.75.75 0 00.591-.734V6.112l-8 1.73v7.684a2.25 2.25 0 01-1.774 2.2l-2.042.44a2.216 2.216 0 11-.935-4.33l2.659-.574A.75.75 0 007 12.53V4.237a.75.75 0 01.591-.733l9.5-2.054a.75.75 0 01.63.149z" clip-rule="evenodd"></path></svg> Last played on Spotify</div>
-                            <div class="spotify-title">${spotifyActivity.details || 'Unknown Song'}</div>
-                            <div class="spotify-artist">${spotifyActivity.state || 'Unknown Artist'}</div>
-                        </div>
-                    `;
-                } else {
-                    document.getElementById('spotifyCard').innerHTML = `
-                        <div class="spotify-info">
-                            <div class="spotify-label"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5"><path fill-rule="evenodd" d="M17.721 1.599a.75.75 0 01.279.584v11.29a2.25 2.25 0 01-1.774 2.198l-2.041.442a2.216 2.216 0 01-.938-4.333l2.662-.576a.75.75 0 00.591-.734V6.112l-8 1.73v7.684a2.25 2.25 0 01-1.774 2.2l-2.042.44a2.216 2.216 0 11-.935-4.33l2.659-.574A.75.75 0 007 12.53V4.237a.75.75 0 01.591-.733l9.5-2.054a.75.75 0 01.63.149z" clip-rule="evenodd"></path></svg> Spotify</div>
-                            <div class="spotify-status">Not listening to anything</div>
-                        </div>
-                    `;
-                }
+                document.getElementById('spotifyCard').innerHTML = `
+                    <div class="spotify-info">
+                        <div class="spotify-label"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5"><path fill-rule="evenodd" d="M17.721 1.599a.75.75 0 01.279.584v11.29a2.25 2.25 0 01-1.774 2.198l-2.041.442a2.216 2.216 0 01-.938-4.333l2.662-.576a.75.75 0 00.591-.734V6.112l-8 1.73v7.684a2.25 2.25 0 01-1.774 2.2l-2.042.44a2.216 2.216 0 11-.935-4.33l2.659-.574A.75.75 0 007 12.53V4.237a.75.75 0 01.591-.733l9.5-2.054a.75.75 0 01.63.149z" clip-rule="evenodd"></path></svg> Spotify</div>
+                        <div class="spotify-status">Not listening to anything</div>
+                    </div>
+            `;
             }
         }
 
