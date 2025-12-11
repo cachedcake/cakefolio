@@ -163,14 +163,15 @@
                     const start = activity.timestamps.start;
                     const now = Date.now();
                     const diff = now - start;
-                    const minutes = Math.floor(diff / 60000);
-                    const hours = Math.floor(minutes / 60);
-                    const mins = minutes % 60;
+                    const seconds = Math.floor(diff / 1000);
+                    const hours = Math.floor(seconds / 3600);
+                    const mins = Math.floor((seconds % 3600) / 60);
+                    const secs = seconds % 60;
                     
                     if (hours > 0) {
-                        elapsed = `${hours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')} elapsed`;
+                        elapsed = `${hours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')} elapsed`;
                     } else {
-                        elapsed = `${mins.toString().padStart(2, '0')}:${Math.floor((diff % 60000) / 1000).toString().padStart(2, '0')} elapsed`;
+                        elapsed = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')} elapsed`;
                     }
                 }
 
